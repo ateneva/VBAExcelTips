@@ -54,7 +54,7 @@ Range("A:A").AutoFilter Field:=1, Criteria1:=RGB(255, 0, 0), Operator:=xlFilterF
 Range("E2:E" & ActiveSheet.UsedRange.Rows.Count).AutoFilter Field:=5, Criteria1:=Array("Approved", "Filled", "To Be Approved"), Operator:=xlFilterValues
 
 '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Select Case today
+Select Case Today
 
     Case 12 'calendar month December; reported month November = FY period 01
     Range("D:D").AutoFilter Field:=4, Criteria1:=Array("FY2015-01", "FY2015-02", _

@@ -141,7 +141,7 @@ End Sub
 
 Sub SizeAndAlignChartObjects()
 
-Dim W As Long, H As Long
+Dim w As Long, h As Long
 Dim TopPosition As Long, LeftPosition As Long
 Dim ChtObj As ChartObject
 Dim i As Long, NumCols As Long
@@ -160,25 +160,25 @@ If NumCols < 1 Then Exit Sub
 On Error GoTo 0
 
 'Get size of active chart
-W = ActiveChart.Parent.width
-H = ActiveChart.Parent.height
+w = ActiveChart.Parent.width
+h = ActiveChart.Parent.Height
 
 'Change starting positions, if necessary
 TopPosition = 100
 LeftPosition = 20
 
-For i = 1 To ActiveSheet.ChartObjects.count
+For i = 1 To ActiveSheet.ChartObjects.Count
     With ActiveSheet.ChartObjects(i)
-        .width = W
-        .height = H
-        .Left = LeftPosition + ((i - 1) Mod NumCols) * W
-        .Top = TopPosition + Int((i - 1) / NumCols) * H
+        .width = w
+        .Height = h
+        .Left = LeftPosition + ((i - 1) Mod NumCols) * w
+        .Top = TopPosition + Int((i - 1) / NumCols) * h
     End With
 Next i
 
 End Sub
 
-Sub CopyEmbeddedChartsToNewSheet(name As String, width As Integer, height As Integer)
+Sub CopyEmbeddedChartsToNewSheet(name As String, width As Integer, Height As Integer)
 
 'Copies all embedded charts in the current workbook to a new worksheet with the specified name.
 'The copied charts have the specified width and height and are arranged in a single column.
@@ -189,7 +189,7 @@ Dim newWS As Worksheet
 Dim oldWS As Worksheet
 Dim co As ChartObject
 Dim yPos As Integer
-Dim count As Integer
+Dim Count As Integer
 
 ' Turn screen updating off so screen does not flicker as charts are copied.
 Application.ScreenUpdating = False
@@ -208,14 +208,14 @@ For Each oldWS In Worksheets
 Next oldWS
 
 'Position and size the charts.
-count = 0
+Count = 0
 For Each co In newWS.ChartObjects
     co.width = width
-    co.height = height
+    co.Height = Height
     co.Left = 30
-    co.Top = count * (height + SPACE_BETWEEN_CHARTS) + SPACE_BETWEEN_CHARTS
+    co.Top = Count * (Height + SPACE_BETWEEN_CHARTS) + SPACE_BETWEEN_CHARTS
     
-count = count + 1
+Count = Count + 1
 Next
 
 ' Turn screen updating back on.

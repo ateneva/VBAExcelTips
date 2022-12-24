@@ -56,12 +56,17 @@ Sub GetRidOfUnunsedRange()
 '~written by Angelina Teneva
 'get rid of unused range
 '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-ThisWorkbook.Worksheets("CATIS").Activate
+ThisWorkbook.Worksheets("data").Activate
 
 With ActiveSheet
     Rows("1:1").AutoFilter
-    Range("A2").End(xlDown).Offset(1, 0).Select                        'reaches the last populated cell and goes to the next row
-    Range(ActiveCell, ActiveCell.SpecialCells(xlLastCell)).Rows.Delete 'uses the curently active cell and goes to the last one of the range
+    
+    'reaches the last populated cell and goes to the next row
+     Range("A2").End(xlDown).Offset(1, 0).Select
+    
+    'uses the curently active cell and goes to the last one of the range
+    Range(ActiveCell, ActiveCell.SpecialCells(xlLastCell)).EntireRow.Delete
+    
 End With
 
 ThisWorkbook.Save
@@ -87,4 +92,24 @@ Next r
 
 Application.ScreenUpdating = True
 MsgBox Counter & " empty rows were deleted."
+End Sub
+
+Sub ReplacePreviousValueWithNextOne()
+
+Dim Cell As Range
+
+'copy to column
+For Each Cell In ActiveSheet.Range("H2:H40")
+
+Cell.Activate
+On Error Resume Next
+
+    If IsDate(Cell) = True Then ActiveCell.Copy Cells(ActiveCell.row - 1, 8)
+    
+        'OR (both produce the same result
+        
+    If IsDate(Cell) = True Then ActiveCell.Copy Cell.Offset(-1, 0)
+
+Next Cell
+
 End Sub

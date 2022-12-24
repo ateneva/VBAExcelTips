@@ -3,6 +3,9 @@ Option Explicit
 
 Sub RemoveGridlines()
 Dim Wks As Worksheet
+'--------------------------------
+'written by Angelina Teneva, 2014
+'--------------------------------
 
 For Each Wks In ActiveWorkbook.Worksheets
 

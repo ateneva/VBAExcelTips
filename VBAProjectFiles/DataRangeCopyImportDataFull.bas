@@ -73,7 +73,7 @@ OutputBk.Save
 
 'get rid of C6 values
 For Each Cell In ActiveSheet.Range("E2:E" & ActiveSheet.UsedRange.Rows.Count)
-    If Cell.Text = "C6" Then Cell.Value = Mid(Cell.Offset(0, 18), 3, 2)
+    If Cell.text = "C6" Then Cell.Value = Mid(Cell.Offset(0, 18), 3, 2)
 Next Cell
 
 OutputBk.Save
@@ -256,7 +256,7 @@ End With
 
 OutputBk.Worksheets("check").Activate
 With ActiveSheet
-    Range("A6:A" & .UsedRange.Rows.Count).RemoveDuplicates Columns:=1, Header:=xlNo
+    Range("A6:A" & .UsedRange.Rows.Count).RemoveDuplicates Columns:=1, HEADER:=xlNo
 End With
 
 OutputBk.Save

@@ -45,8 +45,8 @@ Dim Count As Integer
 '~~~~~~~~~~~~~~~~~~~~~~~
 For Each n In ActiveWorkbook.Names
     If Not n.Visible Then
-		n.Delete
-		Count = Count + 1
+                n.Delete
+                Count = Count + 1
     End If
 Next n
 

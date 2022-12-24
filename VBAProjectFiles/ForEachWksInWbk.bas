@@ -23,7 +23,7 @@ End Sub
 Sub FilterAllTablesInActiveSheet()
 
 Dim Wks As Worksheet
-Dim T As ListObject
+Dim t As ListObject
 Dim i As Integer
 
 Dim bU As String
@@ -34,14 +34,14 @@ Wks.Activate
 
 If ActiveSheet.ListObjects.Count > 0 Then
 
-    For Each T In ActiveSheet.ListObjects
+    For Each t In ActiveSheet.ListObjects
     If bU = "All" Then
-        T.Range.AutoFilter Field:=1
+        t.Range.AutoFilter Field:=1
     Else
-    T.Range.AutoFilter Field:=1, Criteria1:=bU
+    t.Range.AutoFilter Field:=1, Criteria1:=bU
     End If
 
-Next T
+Next t
 
 End If
 End Sub

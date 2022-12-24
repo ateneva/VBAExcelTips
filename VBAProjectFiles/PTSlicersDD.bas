@@ -4,7 +4,7 @@ Option Explicit
 Sub Worksheet_PivotTableUpdate_Slicers()
 'code by Debra Dalgleish
 
-Dim Wb As Workbook
+Dim wb As Workbook
 Dim scShort As SlicerCache
 Dim scLong As SlicerCache
 
@@ -15,9 +15,9 @@ On Error GoTo errHandler
 Application.ScreenUpdating = False
 Application.EnableEvents = False
 
-Set Wb = ThisWorkbook
-Set scShort = Wb.SlicerCaches("Slicer_City")
-Set scLong = Wb.SlicerCaches("Slicer_City1")
+Set wb = ThisWorkbook
+Set scShort = wb.SlicerCaches("Slicer_City")
+Set scLong = wb.SlicerCaches("Slicer_City1")
 
 scLong.ClearManualFilter
 

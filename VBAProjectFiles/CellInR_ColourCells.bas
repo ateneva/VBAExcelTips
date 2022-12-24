@@ -4,19 +4,72 @@ Option Explicit
 Sub ColourWordsInString()
 
 Dim Cell As Range
+Dim i As Integer
 Dim prv As String
-'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dim word As String
 
-For Each Cell In ActiveSheet.Range("B2:B" & ActiveSheet.UsedRange.Rows.count)
+Dim positive(1 To 5) As String
+Dim negative(1 To 5) As String
+'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+'if it finds a certain word in a string, color it red
+'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+positive(1) = "tasty"
+positive(2) = "delicious"
+positive(3) = "love"
+positive(4) = "great"
+positive(5) = "awesome"
+
+negative(1) = "expensive"
+negative(2) = "crap"
+negative(3) = "bitter"
+negative(4) = "smelly"
+negative(5) = "greasy"
+
+For Each Cell In ActiveSheet.Range("J2:J" & ActiveSheet.UsedRange.Rows.Count)
+    
     prv = Cell.Value
-    If InStr(prv, "fetish") <> 0 Then Cell.Activate
-
-        With ActiveCell.Characters(Start:=InStr(prv, "fetish"), Length:=6).Font
-            .Color = -16776961
-        End With
+    For i = 1 To 5
+        word = positive(i)
+       
+        If InStr(prv, positive(i)) > 0 Then
+            Cell.Activate
+            With ActiveCell
+                .Characters(Start:=InStr(prv, positive(i)), Length:=Len(positive(i))).Font.Color = RGB(0, 176, 80)
+            End With
+        End If
+    Next i
+    '---------------------------------------------------------------------------------------
+    
+    For i = 1 To 5
+        word = negative(i)
+       
+        If InStr(prv, negative(i)) > 0 Then
+            Cell.Activate
+            With ActiveCell
+                .Characters(Start:=InStr(prv, negative(i)), Length:=Len(negative(i))).Font.Color = RGB(192, 0, 0)
+            End With
+        End If
+    Next i
     
 Next Cell
+End Sub
+
+Sub ColourHigherListings()
+
+Dim WorkRange As Range
+Dim Cell As Range
+'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Set WorkRange = Application.Intersect(Selection, ActiveSheet.UsedRange)
+
+For Each Cell In WorkRange
+    If Cell.Value > Cells(Cell.row, 3) Then
+        Cell.Font.Color = RGB(255, 0, 0) 'Makes negative cells red
+        Else
+        Cell.Font.Color = xlNone
+    End If
+Next Cell
+
 End Sub
 
 Sub ColorNegativeValuesInCurrentRange()
@@ -51,26 +104,26 @@ Sub ColourCellsin_DifferentColumn()
 Dim Cell As Range
 '~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- For Each Cell In Range("F5:F" & ActiveSheet.UsedRange.Rows.count)
+ For Each Cell In Range("F5:F" & ActiveSheet.UsedRange.Rows.Count)
     Cell.Activate
-        Range(ActiveCell.Offset(0, -5), ActiveCell).Font.Color = RGB(255, 255, 255)
-        If ActiveCell.Value > 10 Then Range(ActiveCell.Offset(0, -5), ActiveCell).Font.Color = RGB(255, 0, 0)
+        Range(ActiveCell.Offset(0, -5), ActiveCell.Offset(0, 4)).Font.Color = RGB(0, 0, 0) 'black (reset any previous formatting)
+        If ActiveCell.Value > 10 Then Range(ActiveCell.Offset(0, -5), ActiveCell.Offset(0, 4)).Font.Color = RGB(255, 0, 0) 'red
     Next Cell
-End If
+
 End Sub
 
 Sub VBAConditonalColorCoding_OffsetColumns()
 
 Dim Cell As Range
 Dim Area As Range
-Set Area = Worksheets("ConsultantList").Range(Cells(4, 12), Cells(ActiveSheet.UsedRange.Rows.count, 12))
+Set Area = Worksheets("ConsultantList").Range(Cells(4, 12), Cells(ActiveSheet.UsedRange.Rows.Count, 12))
 
 For Each Cell In Area
 
     Cell.NumberFormat = "mmm"
     If Cell.text = "Apr" Then Cell.Offset(0, -11).Select
     
-        Range(ActiveCell, Cells((ActiveCell.row), ActiveSheet.UsedRange.Columns.count)).Select
+        Range(ActiveCell, Cells((ActiveCell.row), ActiveSheet.UsedRange.Columns.Count)).Select
                                         'Range(ActiveCell, Cells((ActiveCell.Row), 23)).Select - if we know which the end column is
         Selection.Interior.Color = 49407
 

@@ -13,7 +13,7 @@ Dim Field As String
 '~~~~~~~~~~~~~~~~~~~~~~~~
 
 'Create the cache from a normal cell reference
-Set PTCache = ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:=Worksheets("data").UsedRange)
+Set PTCache = ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, sourcedata:=Worksheets("data").UsedRange)
 
 '**************************************************************************************************************
 'create 3 worksheets and Beautify them

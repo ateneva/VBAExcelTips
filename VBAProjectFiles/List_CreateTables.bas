@@ -19,7 +19,7 @@ Worksheets("SalesData").ListObjects.Add(xlSrcRange, Range("A1", Worksheets("Sale
 Worksheets("SalesData").ListObjects("Table1").TableStyle = "TableStyleLight9"
 
 'creates a PivotCache to be used by existing pivot tables
-PT.ChangePivotCache ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:="Table1", VERSION:=xlPivotTableVersion12)
+PT.ChangePivotCache ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, sourcedata:="Table1", VERSION:=xlPivotTableVersion12)
 '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 'declare a table
 Dim Source As ListObject

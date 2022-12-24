@@ -62,6 +62,6 @@ ThisWorkbook.Worksheets("Account View").Activate
     End With
     
 ThisWorkbook.Worksheets("Amplify Dashboard").Activate
-ThisWorkbook.SaveAs "\\VBOXSVR\Virtual_Machine_\Dashboards\Amplify\Global - Amplify Business Performance Dashboard Q3_" & Format(Date, "yyyymmdd") & ".xlsb"
+ThisWorkbook.saveas "\\VBOXSVR\Virtual_Machine_\Dashboards\Amplify\Global - Amplify Business Performance Dashboard Q3_" & Format(Date, "yyyymmdd") & ".xlsb"
 
 End Sub

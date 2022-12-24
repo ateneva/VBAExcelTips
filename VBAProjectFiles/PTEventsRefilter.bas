@@ -26,7 +26,8 @@ Case vbYes
 Ans = InputBox("Please enter latest fiscal period in the format Period nn yyyy")
 
 For Each Wks In ThisWorkbook.Worksheets
-If Wks.PivotTables.Count > 0 And Wks.name <> "Presales Costs Trend by SL" And Wks.name <> "Costs Trend" And Wks.name <> "# Details" Then Wks.Activate
+If Wks.PivotTables.Count > 0 And Wks.name <> "Presales Costs Trend by SL" _
+            And Wks.name <> "Costs Trend" And Wks.name <> "# Details" Then Wks.Activate
 
 For Each PT In ActiveSheet.PivotTables
 Set PF = PT.PivotFields("Fiscal year/period")

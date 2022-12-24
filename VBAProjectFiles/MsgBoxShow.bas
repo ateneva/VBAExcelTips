@@ -3,8 +3,8 @@ Option Explicit
 
 Sub ShowExcelVersion()
 
-MsgBox Application.Version
-MsgBox "Welcome to Microsoft Excel version " & Application.Version & " running on " & Application.OperatingSystem & "!"
+MsgBox Application.VERSION
+MsgBox "Welcome to Microsoft Excel version " & Application.VERSION & " running on " & Application.OperatingSystem & "!"
 
 'Excel 2007 (12.0)
 'Excel 2010 (14.0)

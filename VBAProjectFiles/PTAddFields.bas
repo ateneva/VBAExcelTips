@@ -60,7 +60,7 @@ For Each PF In PT.DataFields
 Next PF
 
 'adds all available data fields
-For i = 9 To PT.PivotFields.count
+For i = 9 To PT.PivotFields.Count
     PT.PivotFields(i).Orientation = xlDataField
 Next i
 
@@ -95,13 +95,13 @@ PT.PivotFields("Region").PivotItems("E/N Am").Position = 3                      
 PT.PivotFields("Region").PivotItems("E/N Am").Caption = "Europe/N America"                    'chnages the visible name
 
 '~~~~~~~~~~~~~~~~~~~and summary functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-PT.PivotFields("Activity Hours").Function = xlSum 'provided field is visible
+PT.PivotFields("Activity Hours").Function = xlSum         'provided field is visible
 'PT.PivotFields("Activity Hours").Function = xlCount
-'PT.PivotFields("Activity Hours").Function = xlCountNums
-'PT.PivotFields("Activity Hours").Function = xlAverage
-'PT.PivotFields("Activity Hours").Function = xlProduct
-'PT.PivotFields("Activity Hours").Function = xlMax
-'PT.PivotFields("Activity Hours").Function = xlMin
+'PT.PivotFields("Activity Hours").Function = xlCountNums  'of underlying data
+'PT.PivotFields("Activity Hours").Function = xlAverage    'returns average of all values in underlying data
+'PT.PivotFields("Activity Hours").Function = xlProduct    'returns product of all values in underlying data
+'PT.PivotFields("Activity Hours").Function = xlMax        'returns max value of underlying data
+'PT.PivotFields("Activity Hours").Function = xlMin        'returns min value of underlying data
 
 '~~~~~~~~~~~~~~~~~~~~~~changing calculation types ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 PT.PivotFields("Sum of Activity Hours").Calculation = xlNormal
@@ -134,7 +134,7 @@ PT.PivotFields("Sum of Activity Hours").Calculation = xlNoAdditionalCalculation
 
 '~~~~~~~~~~~~~~~~~~~changing DataFields formats~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 PT.DataBodyRange.NumberFormat = "0,0;;"                   'formats a single field
-PT.DataBodyRange.NumberFormat.NumberFormat = "0.00%"
+PT.DataBodyRange.NumberFormat = "0.00%"
 PT.DataBodyRange.NumberFormat = "#,#"                     'formats all fields in values section
 PT.DataBodyRange.NumberFormat = "#,###"                   'formats all the fields currenty in the values area
 
@@ -145,13 +145,6 @@ PT.PivotFields("Region").PivotItems("Europe/N America").DataRange.NumberFormat =
 
 '.DataBodyRange -------------------------------------------> Object in the PivotTable
 '.DataRange -----------------------------------------------> Object in the PivotField and PivotItems
-
-PT.DataBodyRange.Columns(3).FormatConditions.AddDatabar   'adds databar conditional formatting to pivottable
-With PT.DataBodyRange.Columns(3).FormatConditions(1)
-    .BarFillType = xlDataBarFillSolid
-    .MinPoint.Modify newtype:=xlConditionValueNumber, newvalue:=0
-    .MaxPoint.Modify newtype:=xlConditionValueNumber, newvalue:=1
-End With
 
 Next PT
 End With

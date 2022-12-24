@@ -24,7 +24,7 @@ For Each PT In ActiveWorkbook.Worksheets
             
             'if you have users with different version, best use an If-Then-Else Statement
             
-    If Application.Version = "14.0" Then
+    If Application.VERSION = "14.0" Then
                                                 
     'past period
     PF.PivotFilters.Add xlDateYesterday
@@ -86,7 +86,7 @@ For Each PT In ActiveWorkbook.Worksheets
             
     'if you have users with different version, best use an If-Then-Else Statement
     
-    If Application.Version = "14.0" Then
+    If Application.VERSION = "14.0" Then
     
     '.Add Type is only available in Excel 2010
     PT.PivotFields("Description").PivotFilters.Add xlCaptionEquals, Value1:="Sales"
@@ -124,7 +124,7 @@ For Each PT In ActiveWorkbook.Worksheets
     '.Add2 will only work in Excel 2013 or later
     '.Add will only work in Excel 2010 or earlier --> This object, member, or enumeration is deprecated and is not intended to be used in your code.
     
-    If Application.Version = "14.0" Then
+    If Application.VERSION = "14.0" Then
 
     PT.PivotFields("Quarter").PivotFilters.Add xlValueIsGreaterThan, PT.PivotFields("Sum of Visits (000)"), Value1:=1000
     PT.PivotFields("Purpose").PivotFilters.Add xlValueIsGreaterThan, PT.PivotFields("Sum of Visits (000)"), Value1:=1000
@@ -207,7 +207,7 @@ Set PF = PT.PivotFields("Month")
 
 PF.ClearAllFilters
 PF.CurrentPage = "DCC"                                                              'constant
-PF.CurrentPage = today                                                              'today declared as today's date or string to be put via InputBox
+PF.CurrentPage = Today                                                              'today declared as today's date or string to be put via InputBox
 PF.CurrentPage = Format(Application.WorksheetFunction.EoMonth(Date, -1), "m")       'calendar month, hence -1; obtained from computer date
 PF.CurrentPage = Format(Application.WorksheetFunction.EoMonth(Date, 1), "m")        'fiscal period, hence + 1; obtained from computer date
 PF.CurrentPage = "Period " & Format(Application.WorksheetFunction.EoMonth(Date, 1), "mm") & Chr(32) & UTC.Range("H1") ' obtained from computer date + constant

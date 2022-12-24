@@ -28,7 +28,7 @@ With ActiveSheet
 Range("A1:N4").Copy
 
 For PPS = 2 To 12 Step 2
-	PPpres.Slides(PPS).Shapes.PasteSpecial ppPasteEnhancedMetafile
+        PPpres.Slides(PPS).Shapes.PasteSpecial ppPasteEnhancedMetafile
 Next PPS
 
 '''export pivot tables on PowerPoint

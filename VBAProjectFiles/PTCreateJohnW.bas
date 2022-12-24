@@ -12,7 +12,7 @@ Dim row As Long, Col As Long, i As Long
 On Error Resume Next
 
 'Create Pivot Cache
-Set PTCache = ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:=Sheets("SurveyData").Range("A1").CurrentRegion)
+Set PTCache = ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, sourcedata:=Sheets("SurveyData").Range("A1").CurrentRegion)
 
 row = 1
 For i = 1 To 14

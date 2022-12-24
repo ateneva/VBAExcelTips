@@ -1,4 +1,5 @@
 Attribute VB_Name = "WbkProtection"
+Option Explicit
 Sub ShowUser()
 
 ActiveCell.Value = Environ("UserName")                                                 'returns the domain name
@@ -35,16 +36,18 @@ Wbk.ProtectSharing Password:=strPwd, SharingPassword:=strSharePwd
 End Sub
 
 Sub AuthUser()
-'written by Angelina Teneva
 
 Dim Cell As Range
-Dim person, authperson As String
+Dim person As String
+Dim authperson As String
 person = Application.UserName
-'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+'----------------------------------------
+'written by Angelina Teneva, 2013
+'-----------------------------------------
 
-For Each Cell In ActiveWorkbook.Worksheets("Names").Range("E1:E1723")
+For Each Cell In ActiveWorkbook.Worksheets("Names").Range("E1:E100")
     authperson = Cell.Value
-    
+
 If person = authperson Then
         
         Worksheets("data").Visible = xlSheetVisible
@@ -53,10 +56,56 @@ If person = authperson Then
         MsgBox ("Sorry, you are not authorized to view this data")
 End If
 
+Exit For
 Next Cell
+
 End Sub
 
 Sub KeepData()
+
+Dim Wks As Worksheet
+'~~~~~~~~~~~~~~~~~~~~~~
+'written by Angelina Teneva
+'toggling sheet and workbook protection on/off with a password
+
+If ActiveWorkbook.ProtectStructure = True Then
+ActiveWorkbook.Unprotect ("ANNIE")
+
+    For Each Wks In ActiveWorkbook.Worksheets
+       If Wks.Visible = False Then Wks.Visible = True
+       If Wks.Visible = xlSheetVeryHidden Then Wks.Visible = True 'unhides all very hidden sheets
+       
+        Wks.Activate
+        If ActiveSheet.ProtectContents = True Then ActiveSheet.Unprotect ("ANNIE")
+        
+    Next Wks
+    
+    Else
+    
+    '--------hide confidential sheets (comment out if necessary)---------------------
+    For Each Wks In ActiveWorkbook.Worksheets
+        If Wks.name = "Firm R numbers" _
+            Or Wks.name = "Industry Dashboard" _
+            Or Wks.name = "charting" _
+            Or Wks.name Like "Products*" _
+            Or Wks.name Like "MResearch*" Then Wks.Visible = xlSheetVeryHidden
+    
+    Next Wks
+    '--------protect wbk and visible sheets-------------------------------------------
+    ActiveWorkbook.Protect ("ANNIE"), Structure:=True
+      
+    For Each Wks In ActiveWorkbook.Worksheets
+        If Wks.Visible = True Then Wks.Activate
+        
+        ActiveSheet.Protect ("ANNIE"), DrawingObjects:=True, Contents:=True, _
+        Scenarios:=True, AllowSorting:=True, AllowFiltering:=True, AllowUsingPivotTables:=True
+    
+    Next Wks
+
+End If
+End Sub
+
+Sub KeepOutbrainData()
 
 Dim Wks As Worksheet
 '~~~~~~~~~~~~~~~~~~~~~~

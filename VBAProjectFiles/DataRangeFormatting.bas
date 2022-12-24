@@ -3,8 +3,8 @@ Option Explicit
 
 Sub NumberFormatting()
 
-    Range("BP4:BS" & ActiveSheet.UsedRange.Rows.count).NumberFormat = "0"  'format Labour Hours and Total Cost as number with no decimal places
-    Range("BM4:BM" & ActiveSheet.UsedRange.Rows.count).NumberFormat = "@"  'format Fl Text as Text
+    Range("BP4:BS" & ActiveSheet.UsedRange.Rows.Count).NumberFormat = "0"  'format Labour Hours and Total Cost as number with no decimal places
+    Range("BM4:BM" & ActiveSheet.UsedRange.Rows.Count).NumberFormat = "@"  'format Fl Text as Text
     
     Range("M:O").NumberFormat = "0.00"          '(ITO Labour Utilization as Double)
     Range("A:A").NumberFormat = "0.00"          '(FTE & TEnure as Double)
@@ -30,7 +30,7 @@ Sub TextFormatting()
     Selection.MergeCells = True
     
     ActiveCell.VerticalAlignment = xlCenter
-    Range("A2:AR" & .UsedRange.Rows.count).Font.Size = 10
+    Range("A2:AR" & .UsedRange.Rows.Count).Font.Size = 10
 
 End Sub
 
@@ -81,8 +81,8 @@ Columns("B:B").TextToColumns Destination:=Range("B1"), DataType:=xlDelimited, _
         Semicolon:=False, Comma:=True, Space:=False, Other:=False, FieldInfo:=Array(Array(1, 1), Array(2, 1)), TrailingMinusNumbers:=True
 
 'remove duplicate entries
-Range("R2:R" & .UsedRange.Rows.count).RemoveDuplicates Columns:=1, Header:=xlNo 'single column
-Columns("A:B").RemoveDuplicates Columns:=Array(1, 2), Header:=xlYes             'multiple columns
+Range("R2:R" & .UsedRange.Rows.Count).RemoveDuplicates Columns:=1, HEADER:=xlNo 'single column
+Columns("A:B").RemoveDuplicates Columns:=Array(1, 2), HEADER:=xlYes             'multiple columns
 
 End Sub
 

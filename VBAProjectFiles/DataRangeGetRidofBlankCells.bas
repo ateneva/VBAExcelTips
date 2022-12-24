@@ -70,3 +70,5 @@ Next r
 Application.ScreenUpdating = True
 MsgBox Counter & " empty rows were deleted."
 End Sub
+
+

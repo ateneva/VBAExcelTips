@@ -58,23 +58,26 @@ Sub CreateNewSlicer()
 
 Dim Wks As Worksheet
 Dim PT As PivotTable
-Dim SC As SlicerCache
-Dim Sl As Slicer
+Dim SC2 As SlicerCache
+Dim SL As Slicer
 Dim i As Integer
 
 
-Set SC = ActiveWorkbook.SlicerCaches.Add2(Worksheets(1).PivotTables(1), "URL")              'create the Slicer Cache
-SC.Slicers.Add Worksheets(1), , "URL", "Link", 252, 611, 144, 199                           'create the Slicer
-SC.PivotTables.AddPivotTable (Worksheets(2).PivotTables(1))                                 'links the needed PivotTables
-SC.PivotTables.AddPivotTable (Worksheets(3).PivotTables(1))
+Set SC2 = ActiveWorkbook.SlicerCaches.Add2(Worksheets(1).PivotTables(1), "SourceName")        'create the Slicer Cache
+SC2.Slicers.Add Worksheets(1), , "SourceName", "Select Pages", 252, 611, 144, 199                           'create the Slicer
+SC2.PivotTables.AddPivotTable (Worksheets(2).PivotTables(1))                                 'links the needed PivotTables
+SC2.PivotTables.AddPivotTable (Worksheets(3).PivotTables(1))
+SC2.PivotTables.AddPivotTable (Worksheets(4).PivotTables(1))
+SC2.PivotTables.AddPivotTable (Worksheets(5).PivotTables(1))
+SC2.PivotTables.AddPivotTable (Worksheets(6).PivotTables(1))
 
 'copy the slicer on all relevant sheets
 Worksheets(1).Activate
-ActiveSheet.Shapes.Range(Array("URL")).Select                                               'copying the slicer directly will not do, needs to be selected first
+ActiveSheet.Shapes.Range(Array("SourceName")).Select                                               'copying the slicer directly will not do, needs to be selected first
 Selection.Copy
 
 On Error Resume Next                                                                        'offsets the effect of hidden sheets
-For i = 2 To ActiveWorkbook.Worksheets.Count                                                'will return an error if there is a hidden sheet
+For i = 6 To ActiveWorkbook.Worksheets.Count                                                'will return an error if there is a hidden sheet
     Worksheets(i).Paste
 Next i
 
@@ -113,13 +116,13 @@ End Sub
 Sub ChangeAllSlicerCaptions()
     
 Dim SC As SlicerCache
-Dim Sl As Slicer
+Dim SL As Slicer
 '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For Each SC In ActiveWorkbook.SlicerCaches
-    For Each Sl In SC.Slicers
-        If Sl.name = "URL" Then Sl.Caption = "Annie"                                        'the Sl.name is unique to each slicer, you can rename all by omitting the condition
-    Next Sl
+    For Each SL In SC.Slicers
+        If SL.name = "URL" Then SL.Caption = "Annie"                                        'the Sl.name is unique to each slicer, you can rename all by omitting the condition
+    Next SL
 Next SC
 
 End Sub
@@ -127,7 +130,7 @@ End Sub
 Sub ChangeAllSlicerCaptionsInACache()
 
 Dim SC As SlicerCache
-Dim Sl As Slicer
+Dim SL As Slicer
 Dim SCName As String
 '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -137,24 +140,24 @@ For Each SC In ActiveWorkbook.SlicerCaches
     Select Case SCName
     '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Case "Slicer_Platform"
-        For Each Sl In SC.Slicers
-           Sl.Caption = "Platform (Does not affect Platform comparison elements)"
-        Next Sl
+        For Each SL In SC.Slicers
+           SL.Caption = "Platform (Does not affect Platform comparison elements)"
+        Next SL
         
     Case "Slicer_Week"
-        For Each Sl In SC.Slicers
-           Sl.Caption = "Week (Does not affect Weekly Performance Column)"
-        Next Sl
+        For Each SL In SC.Slicers
+           SL.Caption = "Week (Does not affect Weekly Performance Column)"
+        Next SL
     
     Case "Slicer_SalesRepLocation"
-        For Each Sl In SC.Slicers
-           Sl.Caption = "Country (of Sales rep)"
-        Next Sl
+        For Each SL In SC.Slicers
+           SL.Caption = "Country (of Sales rep)"
+        Next SL
     
     Case "Slicer_SalesRepRegion"
-        For Each Sl In SC.Slicers
-           Sl.Caption = "Region (of Sales rep)"
-        Next Sl
+        For Each SL In SC.Slicers
+           SL.Caption = "Region (of Sales rep)"
+        Next SL
     '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     End Select
 
@@ -164,19 +167,19 @@ End Sub
 Sub ChangeSlicersNumberOfColumns()
 
 Dim SC As SlicerCache
-Dim Sl As Slicer
+Dim SL As Slicer
 
 For Each SC In ActiveWorkbook.SlicerCaches
-    For Each Sl In SC.Slicers
+    For Each SL In SC.Slicers
         Select Case SC.name
-                Case "Slicer_SalesRepRegion": Sl.NumberOfColumns = 3
-                Case "Slicer_SalesRepLocation": Sl.NumberOfColumns = 4
-                Case "Slicer_Platform": Sl.NumberOfColumns = 4
-                Case "Slicer_Week": Sl.NumberOfColumns = 14
-                Case "Slicer_Quarter": Sl.NumberOfColumns = 4
-                Case "Slicer_Month": Sl.NumberOfColumns = 6
+                Case "Slicer_SalesRepRegion": SL.NumberOfColumns = 3
+                Case "Slicer_SalesRepLocation": SL.NumberOfColumns = 4
+                Case "Slicer_Platform": SL.NumberOfColumns = 4
+                Case "Slicer_Week": SL.NumberOfColumns = 14
+                Case "Slicer_Quarter": SL.NumberOfColumns = 4
+                Case "Slicer_Month": SL.NumberOfColumns = 6
         End Select
-    Next Sl
+    Next SL
 Next SC
 End Sub
 
@@ -185,7 +188,7 @@ Sub MultiplePivotSlicerCaches()
 Dim Wks As Worksheet
 Dim PT As PivotTable
 Dim SC As SlicerCache
-Dim Sl As Slicer
+Dim SL As Slicer
     
     For Each SC In ActiveWorkbook.SlicerCaches
         

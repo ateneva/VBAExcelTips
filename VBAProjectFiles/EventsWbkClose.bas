@@ -25,7 +25,7 @@ Next Wks
 
 End Sub
 
-Private Sub Workbook_BeforeClose(Cancel As Boolean)
+Private Sub Workbook_BeforeClose2(Cancel As Boolean)
 
 Dim Ans As Integer, Ans2 As Integer, Ans3 As Integer
 '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
